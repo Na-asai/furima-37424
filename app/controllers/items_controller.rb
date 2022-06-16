@@ -6,6 +6,9 @@ def index
 end
 
 
+def new
+end
+
 private
 
 def move_to_index
