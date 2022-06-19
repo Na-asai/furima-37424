@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
-  before_action :move_to_index, except: [:index]
+  #before_action :move_to_index, except: [:index]
 
   def index
-    @items = Item.includes(:user)
+    #@items = Item.includes(:user)
   end
 
   def new
@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
                                  :item_scheduled_delivery_id, :item_shipping_fee_status_id, :prefecture_id, :item_price).merge(user_id: current_user.id)
   end
 
-  def move_to_index
-    redirect_to action: :index unless user_signed_in?
-  end
+  #def move_to_index
+    #redirect_to action: :index unless user_signed_in?
+  #end
 end
