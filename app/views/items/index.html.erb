@@ -130,6 +130,12 @@
 
       <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
       <li class='list'>
+              <% @items.each do |item| %>
+                <Li><%= image_tag item.image.variant(resize: '400x400'), class: 'image-list' %></Li>
+                <Li><%= item.item_name %><Li>
+                <Li><%= item.item_price%><Li>
+                <Li><%= item.item_scheduled_delivery%><Li>
+              <% end %>
         <%= link_to "#" do %>
         <div class='item-img-content'>
           <%= image_tag "item-sample.png", class: "item-img" %>
