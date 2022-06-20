@@ -40,12 +40,12 @@ RSpec.describe Item, type: :model do
         @item.item_sale_status_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Item sale status can't be blank")
-      end  
+      end
       it 'item_sale_status_idが---だと登録できない' do
         @item.item_sale_status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Item sale status can't be blank")
-      end  
+      end
       it 'item_shipping_fee_status_idが空だと登録できない' do
         @item.item_shipping_fee_status_id = ''
         @item.valid?
