@@ -34,6 +34,7 @@ class ItemsController < ApplicationController
       render :edit
     end
   end
+  
 
   private
 
