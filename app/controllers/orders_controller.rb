@@ -1,10 +1,9 @@
 class OrdersController < ApplicationController
+  before_action :set_item
   before_action :authenticate_user!
 
   def index
-    @item = Item.find(params[:item_id])
     @order_delivery_address = OrderDeliveryAddress.new
-
      if @item.order.blank?
         redirect_to root_path if current_user == @item.user
       else
@@ -13,7 +12,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_delivery_address = OrderDeliveryAddress.new(order_params)
     if @order_delivery_address.valid?
       pay_item
@@ -25,6 +23,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 
   def order_params
     params.require(:order_delivery_address).permit(:card_number, :card_exp_month, :card_exp_year, :card_cvc, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number, :item_id)
