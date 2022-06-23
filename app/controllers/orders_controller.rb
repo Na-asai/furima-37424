@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     @order_delivery_address = OrderDeliveryAddress.new(order_params)
-    if@order_delivery_address.valid?
+    if  @order_delivery_address.valid?
       @order_delivery_address.save
       return redirect_to root_path
     else
@@ -20,8 +20,8 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit( :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number, :item_id)
-          .merge(user_id: current_user.id)
+    params.require(:order_delivery_address).permit(:card_number, :card_exp_month, :card_exp_year, :card_cvc, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number, :item_id)
+          .merge(user_id: current_user.id, item_id: @item.id)
   end
 
 end
