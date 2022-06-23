@@ -1,6 +1,7 @@
 class OrderDeliveryAddress
   include ActiveModel::Model
-  attr_accessor :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number, :item_id, :user_id, :card_number, :card_exp_month, :card_exp_year, :card_cvc
+  attr_accessor :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number, :item_id, :user_id,
+                :card_number, :card_exp_month, :card_exp_year, :card_cvc,:token
 
   with_options presence: true do
     validates :item_id
