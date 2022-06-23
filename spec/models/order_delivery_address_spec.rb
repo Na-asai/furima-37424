@@ -25,7 +25,7 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       it 'postal_codeにハイフンがないと登録できない' do
         @order_delivery_address.postal_code = '12345678'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@order_delivery_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it 'prefecture_idが空だと登録できない' do
         @order_delivery_address.prefecture_id = ''
@@ -38,9 +38,9 @@ RSpec.describe OrderDeliveryAddress, type: :model do
         expect(@order_delivery_address.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'cityが空だと登録できない' do
-          @order_delivery_address.city = ''
-          @order_delivery_address.valid?
-          expect(@order_delivery_address.errors.full_messages).to include("City can't be blank")
+        @order_delivery_address.city = ''
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include("City can't be blank")
       end
       it 'addressesが空だと登録できない' do
         @order_delivery_address.addresses = ''
@@ -52,15 +52,15 @@ RSpec.describe OrderDeliveryAddress, type: :model do
         @order_delivery_address.valid?
         expect(@order_delivery_address.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone_numberが8桁以下だと登録できない' do
-        @order_delivery_address.phone_number = '12345678'
+      it 'phone_numberが9桁以下だと登録できない' do
+        @order_delivery_address.phone_number = '123456789'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberが12桁以上だと登録できない' do
         @order_delivery_address.phone_number = '123456789012'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number is invalid')
       end
       it 'tokenが生成されていないと登録できない' do
         @order_delivery_address.token = ''

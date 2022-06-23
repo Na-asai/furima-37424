@@ -1,13 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :contributor_confirmation, only: [:edit, :update, :destroy]
 
   def index
     @item = Item.find(params[:item_id])
     @order_delivery_address = OrderDeliveryAddress.new
-    if current_user == @item.user
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user == @item.user
   end
 
   def create
@@ -37,9 +34,4 @@ class OrdersController < ApplicationController
       currency: 'jpy'
     )
   end
-
-  def contributor_confirmation
-    redirect_to root_path  current_user == @item.user
-  end
-
 end
