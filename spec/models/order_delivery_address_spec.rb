@@ -6,11 +6,14 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
       @order_delivery_address = FactoryBot.build(:order_delivery_address, user_id: user.id, item_id: item.id)
-      sleep 0.1
     end
 
     context '商品を購入できるとき' do
       it 'すべての必要なデータが存在すれば登録できる' do
+        expect(@order_delivery_address).to be_valid
+      end
+      it 'buildingが空でも登録できる' do
+        @order_delivery_address.building = ''
         expect(@order_delivery_address).to be_valid
       end
     end
@@ -59,6 +62,16 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       end
       it 'phone_numberが12桁以上だと登録できない' do
         @order_delivery_address.phone_number = '123456789012'
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'phone_numberが全角だと登録できない' do
+        @order_delivery_address.phone_number = '１２３４５６７８９０'
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'phone_numberが半角数字以外だと登録できない' do
+        @order_delivery_address.phone_number = 'abcdefghij'
         @order_delivery_address.valid?
         expect(@order_delivery_address.errors.full_messages).to include('Phone number is invalid')
       end
