@@ -132,9 +132,17 @@
         <% @items.each do |item| %>
             <li class='list'>
               <%= link_to item_path(item) do %>
+              <% if item.order.blank?  %>
                 <div class='item-img-content'>
                     <%= image_tag item.image, class: 'item-img' %>
                 </div>
+              <%else%>
+                  <div class='item-img-content'>
+                  <%= image_tag item.image, class: 'item-img' %>
+              <div class='sold-out'>
+                <span>Sold Out!!</span>
+              </div>
+              <%end%>
                 <div class='item-info'>
                   <h3 class='item-name'>
                     <%= item.item_name %>
@@ -152,13 +160,7 @@
               <% end %>
             </li>
         <% end %>
-              <%# 商品が売れていればsold outを表示しましょう %>
-              <%#<div class='sold-out'>
-                <span>Sold Out!!</span>
-              </div>
-              <%# //商品が売れていればsold outを表示しましょう %>
-
-       <% else %>
+      <% else %>
             <li class='list'>
               <%= link_to '#' do %>
                 <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
