@@ -4,11 +4,10 @@ class OrdersController < ApplicationController
 
   def index
     @order_delivery_address = OrderDeliveryAddress.new
-     if @item.order.blank?
-        redirect_to root_path if current_user == @item.user
-      else
+       if @item.order.blank? 
+       else
         redirect_to root_path
-     end 
+      end 
   end
 
   def create
