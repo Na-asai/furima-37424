@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   def index
     @order_delivery_address = OrderDeliveryAddress.new
-       if @item.order.blank? 
+       if @item.order.blank?
        else
         redirect_to root_path
       end 
